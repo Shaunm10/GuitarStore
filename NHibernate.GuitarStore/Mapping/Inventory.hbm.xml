@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="NHibernate.GuitarStore.Common.Inventory, Nhibernate.GuitarStore">
+  <class name="NHibernate.GuitarStore.Common.Inventory, NHibernate.GuitarStore" table="Inventory">
+    <id name="Id" column="Id" type="System.Guid"/>
+    <property name="TypeId" column="TypeId" type="System.Guid"/>
+    <property name="Builder" column="Builder" type="System.String"/>
+    <property name="Model" column="Model" type="System.String"/>
+    <property name="Qoh" column="QOH" type="System.Int32"/>
+    <property name="Cost" column="Cost" type="System.Decimal"/>
+    <property name="Price" column="Price" type="System.Decimal"/>
+    <property name="Recieved" column="Recieved" type="System.DateTime"/>
+    <property name="Profit" type="System.Decimal" formula="ROUND((Price - Cost), 2)"/>
+  </class>
+</hibernate-mapping>

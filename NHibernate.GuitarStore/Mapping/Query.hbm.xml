@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="GuitarValueByTypeSQL">
+    <![CDATA[
+        SELECT
+	        g.Type
+	        , sum(i.Cost)	
+        FROM 
+	        dbo.Guitar g
+	        , dbo.Inventory i
+        WHERE 
+	        g.Id = i.TypeId
+        GROUP BY 
+	        g.Type    
+    ]]>
+  </sql-query>
+  <query name="GuitarValueByTypeHQL">
+    <![CDATA[
+        select 
+	        g.Type
+	        , SUM(i.Cost)
+        FROM
+	         Guitar g
+	         , Inventory i 
+        where g.Id = i.TypeId 
+        GROUP by g.Type
+    ]]>    
+  </query>
+  <query name="GuitarAVGValueByTypeHQL">
+    <![CDATA[ 
+      SELECT g.Type, ROUND(AVG(i.Cost),2)
+      FROM Guitar g, Inventory i
+      WHERE g.Id = i.TypeId
+      group by g.Type
+    ]]>
+  </query>
+  <query name="GuitarMINValueByTypeHQL">
+    <![CDATA[ 
+      SELECT g.Type, MIN(i.Cost)
+      FROM Guitar g, Inventory i
+      WHERE g.Id = i.TypeId
+      group by g.Type
+    ]]>
+  </query>
+  <query name="GuitarMAXValueByTypeHQL">
+    <![CDATA[ 
+      SELECT g.Type, MAX(i.Cost)
+      FROM Guitar g, Inventory i
+      WHERE g.Id = i.TypeId
+      group by g.Type
+    ]]>
+  </query>
+  <query name="GuitarCOUNTByTypeHQL">
+    <![CDATA[ 
+      SELECT g.Type, COUNT(DISTINCT i.Model)
+      FROM Guitar g, Inventory i
+      WHERE g.Id = i.TypeId
+      group by g.Type
+    ]]>
+  </query>
+</hibernate-mapping>
